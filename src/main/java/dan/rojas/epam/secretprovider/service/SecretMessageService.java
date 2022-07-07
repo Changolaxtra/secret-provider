@@ -61,6 +61,7 @@ public class SecretMessageService {
       final SecretKey secretKey = secretKeyService.getSecretKey(sender);
       final String message = aesService.decrypt(secretMessage.getMessage(), secretKey);
       builder.senderUsername(sender).message(message);
+      secretRepository.deleteById(uuid);
     } else {
       builder.error("Message not found.");
     }
